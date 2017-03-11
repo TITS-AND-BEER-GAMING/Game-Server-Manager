@@ -7,16 +7,15 @@ startServer() {
     $START
 
     # Check that the server has started
-    RUNNING_PID=$!
-    setGrepPid
+    updatePid $!
     
     if [[ $(ps -aux | grep $GREP_PID) ]]
     then
         success 'Server started! PID:'$RUNNING_PID
-        updatePID $RUNNING_PID
+        updatePid $RUNNING_PID
     else
         error 'Failed to start server'
-        updatePID ''
+        updatePid ''
         exit 1
     fi
 }

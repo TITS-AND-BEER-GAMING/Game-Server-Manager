@@ -4,6 +4,6 @@
 loadFunctions() {
     for function in "SERVER_FUNCTIONS"/*
     do
-      source .$SERVER_FUNCTIONS/$function
+      source $function
     done
 }

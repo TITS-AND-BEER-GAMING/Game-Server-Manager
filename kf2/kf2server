@@ -10,7 +10,7 @@ loadFunctions
 
 # Kill current running instance if one exists
 status 'Checking if another instance of the server is already running...'
-updatePID
+updatePid
 killRunningServer
 
 # Check for updates
