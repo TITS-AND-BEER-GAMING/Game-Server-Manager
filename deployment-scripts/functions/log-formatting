@@ -1,0 +1,31 @@
+#! /bin/bash
+# Log functions
+# Format strings for logging
+
+# Logging colours
+CYAN=$(tput setaf 6)
+YELLOW=$(tput setaf 3)
+GREEN=$(tput setaf 2)
+RED=$(tput setaf 1)
+RESET=$(tput sgr0)
+
+# Print string with status formatting
+status() {
+    echo -e [$CYAN status $RESET ] $1
+}
+
+# Print string with success formatting
+success() {
+    echo -e [$GREEN success$RESET ] $1
+}
+
+# Print string with warning formatting
+warning() {
+    echo -e [$YELLOW warning$RESET ] $1
+}
+
+# Print string with error formatting
+error() {
+    echo -e [$RED error  $RESET  ] $1
+}
+

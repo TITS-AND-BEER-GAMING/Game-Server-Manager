@@ -1,0 +1,13 @@
+#! /bin/bash
+#  Update the server using steamcmd
+
+updateServer() {
+ steamcmd \
+ +@sSteamCmdForcePlatformType windows \
+ +login anonymous \
+ +force_install_dir $SERVER_FILES \
+ +app_update $STEAM_APP_ID \
+ +exit \
+ >$STEAMCMD_LOG
+ success 'Finished updating'
+}

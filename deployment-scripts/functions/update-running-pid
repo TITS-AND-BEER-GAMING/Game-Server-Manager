@@ -1,0 +1,28 @@
+#! /bin/bash
+# Update the RUNNING_PID file
+# Usage: updatePID [PID]
+# PID fiile can also be cleared by passing empty string ''
+
+setGrepPid() {
+    # Format the RUNNING_PID so that it can be used in grep command. Example result: [1]3256
+    GREP_PID=$(echo $(echo [)$(echo $RUNNING_PID | head -c 1)$(echo ])$(echo $RUNNING_PID | cut -c2-))
+}
+
+updatePid() {
+    # Check if RUNNING_PID file exists, creat the file if it does not
+    if [[ ! -f $SERVER_FILES'/RUNNING_PID' ]]
+    then
+        echo '' > $SERVER_FILES'/RUNNING_PID'
+    fi
+
+    # Write to RUNNING_PID file if PID has been provided, read from the file if not
+    if [[ $1 ]]
+    then
+        echo $1 > $SERVER_FILES'/RUNNING_PID'
+        RUNNING_PID=$1
+    else
+        RUNNING_PID=$(cat $SERVER_FILES'/RUNNING_PID')
+    fi
+
+    setGrepPid $RUNNING_PID
+}

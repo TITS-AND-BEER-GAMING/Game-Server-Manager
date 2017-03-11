@@ -1,0 +1,16 @@
+#! /bin/bash
+# Server information
+
+# Server Manager config
+SERVER_HOME=$(pwd)
+SERVER_FILES=$SERVER_HOME'/serverfiles'
+SERVER_FUNCTIONS=$SERVER_HOME'/deployment-scripts/functions'
+SERVER_LOG=$SERVER_FILES'/logs/server.log'
+STEAMCMD_LOG=$SERVER_FILES'/logs/steamcmd.log'
+LOG='>$SERVER_LOG &>$SERVER_LOG'
+RUNNING_PID_FILE=$SERVER_FILES'/RUNNING_PID'
+
+# Server config
+STEAM_APP_ID='232130'
+PROCESS_NAME='KFServer.exe'
+START='wine Binaries/Win64/KFServer.exe $LOG &'

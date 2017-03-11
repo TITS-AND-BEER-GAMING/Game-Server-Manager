@@ -1,0 +1,30 @@
+#! /bin/bash
+# Kill the current instance of the server using the PID stored in the RUNNING_PID file
+# If the server cannot be killed by the PID then an attempt to kill the process by name will be made
+
+killRunningServer() {
+    # Check for instance of server
+    if [[ $(ps -aux | grep $GREP_PID) ]]
+    then
+        status 'Killing process ('$RUNNING_PID') of previous instance...'
+        kill $RUNNING_PID
+    else
+        status 'Running server instance not found'
+    fi
+
+    # Check if process was successfully killed
+    if [[ $(ps -aux | grep $GREP_PID) ]]
+    then
+        warning 'Unable to kill server with saved PID:'$RUNNING_PID', attempting to find and kill process by name: '$PROCESS_NAME'...'
+        if [[ $(pgrep $PROCESS_NAME) ]]
+        then
+            kill $(pgrep $PROCESS_NAME)
+        else
+   	    status 'Cannot find process named '$PROCESS_NAME', clearing saved PID'
+	    updatePID ''
+        fi
+    else
+        success 'Process killed'
+        updatePID ''
+    fi
+}

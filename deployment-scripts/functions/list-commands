@@ -1,0 +1,15 @@
+#! /bin/bash
+# List available commands
+
+# Logging colours
+CYAN=$(tput setaf 6)
+YELLOW=$(tput setaf 3)
+
+printCommand() {
+    echo -e $CYAN $1 $RESET $2
+}
+
+echo -e $YELLOW 'Commands'
+printCommand 'start' '| Start and instance of the server (this will also kill the current server if there is one and check for updates)'
+printCommand 'stop'  '| Kill the current running instance of the server'
+

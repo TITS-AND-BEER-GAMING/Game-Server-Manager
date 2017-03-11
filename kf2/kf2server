@@ -1,0 +1,24 @@
+#! /bin/bash
+# Start a Killing Floor 2 Server
+
+# Server information
+source ./server-config
+
+# Load functions
+source .$SERVER_HOME'/deployment-scripts/load-functions'
+loadFunctions
+
+# Kill current running instance if one exists
+status 'Checking if another instance of the server is already running...'
+updatePID
+killRunningServer
+
+# Check for updates
+status 'Making sure server files are up to date with steamcmd, this may take some time if the server files need to be downloaded...'
+updateServer
+
+# Start the server
+status 'Starting server'
+startServer
+
+exit 0
