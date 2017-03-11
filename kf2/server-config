@@ -13,4 +13,4 @@ RUNNING_PID_FILE=$SERVER_FILES'/RUNNING_PID'
 # Server config
 STEAM_APP_ID='232130'
 PROCESS_NAME='KFServer.exe'
-START='wine Binaries/Win64/KFServer.exe $LOG &'
+START='wine Binaries/Win64/KFServer.exe'

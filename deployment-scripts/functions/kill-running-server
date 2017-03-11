@@ -6,7 +6,7 @@ killRunningServer() {
     if [[ $RUNNING_PID ]]
     then
         # Check for instance of server
-        if [[ $(ps -aux | grep $GREP_PID) ]]
+        if [[ $(ps -aux | grep $GREP_PID | awk '{print $2}') ]]
         then
             status 'Killing process ('$RUNNING_PID') of previous instance...'
             kill $RUNNING_PID
@@ -14,10 +14,12 @@ killRunningServer() {
             status 'Running server instance not found'
         fi
 
+        sleep 1
+
         # Check if process was successfully killed
-        if [[ $(ps -aux | grep $GREP_PID) ]]
+        if [[ $(ps -aux | grep $GREP_PID | awk '{print $2}') ]]
         then
-            warning 'Unable to kill server with saved PID:'$RUNNING_PID', attempting to find and kill process by name: '$PROCESS_NAME'...'
+            warning 'Unable to kill server with saved PID:'$RUNNING_PID', killing process by name: '$PROCESS_NAME'...'
             if [[ $(pgrep $PROCESS_NAME) ]]
             then
                 kill $(pgrep $PROCESS_NAME)
@@ -29,5 +31,7 @@ killRunningServer() {
             success 'Process killed'
             updatePid ''
         fi
+    else
+        status 'No other running instance'
     fi
 }
